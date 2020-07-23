@@ -39,7 +39,7 @@ class BondEntity(Entity):
     @property
     def assumed_state(self) -> bool:
         """Let HA know this entity relies on an assumed state tracked by Bond."""
-        return True
+        return self._hub.is_bridge and not self._device.trust_state
 
     async def async_update(self):
         """Fetch assumed state of the cover from the hub using API."""
